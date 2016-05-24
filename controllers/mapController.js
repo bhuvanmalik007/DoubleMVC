@@ -14,9 +14,22 @@ var mapController = function(Map){
         });
     }
 
+    var getsearch = function (req, res) {
+        Map.findOne({ "features.properties.name":req.params.s}, function(err,map) {
+
+            if (err) {
+                res.status(500).send(err);
+            }
+            else {
+                res.json(map);
+            }
+        });
+    }
+
 
     return{
-        getall:getall
+        getall:getall,
+        getsearch:getsearch
     }
 
 }
